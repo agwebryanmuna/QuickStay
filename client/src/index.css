@@ -11,6 +11,10 @@
   font-family: Outfit;
 }
 
+a.active div {
+  @apply w-full;
+}
+
 .font-playfair {
   font-family: Playfair !important;
 }
