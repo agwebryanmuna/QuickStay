@@ -1,14 +1,49 @@
-import React, { useState } from 'react'
-import { roomsDummyData } from "../../assets/assets.js";
+import React, { useEffect, useState } from 'react'
 import Title from "../../components/Title.jsx";
 import { useAppContext } from "../../context/AppContext.jsx";
+import toast from "react-hot-toast";
 
 const ListRoom = () => {
   
-  const [ rooms, setRooms ] = useState(roomsDummyData);
-  const { currency } = useAppContext()
+  const [ rooms, setRooms ] = useState([])
   
+  const { currency, axios, getToken, user } = useAppContext()
   
+  // Fetch Rooms for the hotel owner
+  const fetchRooms = async () => {
+    try {
+      const { data: response } = await axios.get('/api/rooms/owner/', { headers: { Authorization: `Bearer ${await getToken()}` } })
+      if (response.success) {
+        setRooms(response.data)
+      } else {
+        toast.error(response.message || "Failed to fetch rooms")
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  
+  // toggle availability of the room
+  const toggleAvailability = async (roomId) => {
+    try {
+      const { data: response } = await axios.post('/api/rooms/toggle-availability/', { roomId }, { headers: { Authorization: `Bearer ${await getToken()}` } })
+      if (response.success) {
+        toast.success(response.message || "Room availability toggled successfully")
+        await fetchRooms()
+      } else {
+        toast.error(response.message || "Failed to toggle room availability")
+      }
+    } catch (e) {
+      console.log(e)
+    }
+    
+  }
+  
+  useEffect(() => {
+    if (user) {
+      fetchRooms();
+    }
+  }, [ user ])
   return (
     <div>
       <Title align='left' font={'outfit'} title={'Room Listings'}
@@ -37,7 +72,9 @@ const ListRoom = () => {
               <td className='py-3 px-4 border-t border-gray-300 text-sm text-red-500 text-center'>
                 <label
                   className={`relative inline-flex items-center cursor-pointer text-gray-900 gap-3`}>
-                  <input type='checkbox' className='sr-only peer' checked={room.isAvailable}/>
+                  <input type='checkbox' onChange={() => toggleAvailability(room._id)}
+                         className='sr-only peer'
+                         checked={room.isAvailable}/>
                   <div
                     className='w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200'/>
                   <span

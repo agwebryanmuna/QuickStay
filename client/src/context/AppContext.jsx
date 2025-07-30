@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useAuth, useUser } from "@clerk/clerk-react";
@@ -21,6 +21,7 @@ export const AppContextProvider = ({ children }) => {
   const [ isOwner, setIsOwner ] = useState(false);
   const [ showHotelReg, setShowHotelReg ] = useState(false);
   const [ searchedCities, setSearchedCities ] = useState([]);
+  const [ rooms, setRooms ] = useState([]);
   
   
   const [ isLoading, setIsLoading ] = useState(false);
@@ -28,16 +29,32 @@ export const AppContextProvider = ({ children }) => {
   const fetchUser = async () => {
     setIsLoading(true);
     try {
-      const { data: response } = await axios.get(`/api/users/`, { headers: { Authorization: `Bearer ${await getToken()}` } })
+      const token = await getToken()
+      const { data: response } = await axios.get(`/api/users`, { headers: { Authorization: `Bearer ${token}` } })
       if (response.success) {
         setIsOwner(response.data.role === 'hotelOwner');
         setSearchedCities(response.data.recentSearchedCities);
+      } else {
+        toast.error(response.message || "Could not fetch user data.")
       }
     } catch (e) {
       console.log(e)
-      toast.error(e.message || "Something went wrong")
     } finally {
       setIsLoading(false);
+    }
+  };
+  
+  const fetchRooms = async () => {
+    try {
+      const { data: response } = await axios.get('/api/rooms')
+      console.log(response)
+      if (response.success) {
+        setRooms(response.data)
+      } else {
+        toast.error(response.message || "Failed to fetch rooms")
+      }
+    } catch (e) {
+      console.log(e)
     }
   }
   
@@ -46,6 +63,10 @@ export const AppContextProvider = ({ children }) => {
       fetchUser()
     }
   }, [ user ]);
+  
+  useEffect(() => {
+    fetchRooms()
+  }, []);
   
   
   const value = {
@@ -61,6 +82,7 @@ export const AppContextProvider = ({ children }) => {
     searchedCities,
     setSearchedCities,
     isLoading,
+    rooms, setRooms,
   }
   
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

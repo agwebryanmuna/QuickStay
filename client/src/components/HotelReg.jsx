@@ -29,7 +29,7 @@ const HotelReg = () => {
         setIsOwner(true);
         setShowHotelReg(false);
       } else {
-        toast.error(response.message || "Something went wrong");
+        toast.error(response.message || "Failed to register Hotel.");
       }
     } catch (e) {
       toast.error(e.message || "Something went wrong");

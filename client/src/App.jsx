@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router";
+import { Navigate, Route, Routes, useLocation } from "react-router";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
@@ -15,7 +15,7 @@ import ListRoom from "./pages/hotelOwner/ListRoom.jsx";
 
 const App = () => {
   const isOwnerPath = useLocation().pathname.includes("/owner");
-  const { showHotelReg } = useAppContext()
+  const { showHotelReg, isOwner } = useAppContext()
   return (
     <div>
       <Toaster/>
@@ -27,7 +27,7 @@ const App = () => {
           <Route path="/rooms" element={<AllRooms/>}/>
           <Route path="/rooms/:roomId" element={<RoomDetails/>}/>
           <Route path="/my-bookings" element={<MyBookings/>}/>
-          <Route path='/owner' element={<Layout/>}>
+          <Route path='/owner' element={isOwner ? <Layout/> : <Navigate to={'/'}/>}>
             <Route index element={<Dashboard/>}/>
             <Route path="add-room" element={<AddRoom/>}/>
             <Route path="list-room" element={<ListRoom/>}/>
