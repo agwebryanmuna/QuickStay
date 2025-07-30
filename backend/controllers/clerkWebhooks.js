@@ -1,7 +1,7 @@
 import User from '../models/User.model.js';
 import { Webhook } from "svix";
 
-const clerkWebhooks = async (req,res) => {
+const clerkWebhooks = async (req, res) => {
   const hook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
   
   // getting headers
@@ -12,10 +12,10 @@ const clerkWebhooks = async (req,res) => {
   }
   
   // verifying headers
-  await hook.verify(JSON.stringify(req.body),headers);
+  await hook.verify(JSON.stringify(req.body), headers);
   
   // getting data from the request body
-  const { data,type } = req.body;
+  const { data, type } = req.body;
   
   const userData = {
     _id: data.id,
@@ -34,7 +34,6 @@ const clerkWebhooks = async (req,res) => {
       await User.findByIdAndUpdate(
         data.id,
         userData,
-        { new: true }
       )
       break;
     }
@@ -47,7 +46,7 @@ const clerkWebhooks = async (req,res) => {
       break;
   }
   
-  res.json({success: true, message: 'Webhook received successfully!'});
+  res.json({ success: true, message: 'Webhook received successfully!' });
   
 }
 
