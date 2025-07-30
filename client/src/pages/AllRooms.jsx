@@ -166,7 +166,7 @@ const AllRooms = () => {
             >
               {openFilters ? "HIDE" : "SHOW"}
             </span>
-            <span className="hidden lg:block">CLEAR</span>
+            <span onClick={() => clearFilters()} className="hidden lg:block">CLEAR</span>
           </div>
         </div>
         
