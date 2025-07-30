@@ -2,7 +2,7 @@
 
 export const getUserData = (req, res) => {
   
-  const role = req.user.roles;
+  const role = req.user.role;
   const recentSearchedCities = req.user.recentSearchedCities;
   
   res.status(200).json({ success: true, data: { role, recentSearchedCities } });

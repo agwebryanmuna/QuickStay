@@ -3,18 +3,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #2563eb;
-  --color-secondary: #fbbf24;
+    --color-primary: #2563eb;
+    --color-secondary: #fbbf24;
 }
 
 * {
-  font-family: Outfit;
+    font-family: Outfit;
 }
 
 a.active div {
-  @apply w-full;
+    @apply w-full;
 }
 
 .font-playfair {
-  font-family: Playfair !important;
+    font-family: Playfair !important;
 }

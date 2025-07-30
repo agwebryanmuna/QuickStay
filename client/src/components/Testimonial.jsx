@@ -12,9 +12,9 @@ const Testimonial = () => {
         }
       />
       <div className="flex flex-wrap items-center justify-center md:justify-stretch gap-6 mt-20">
-        {testimonials.map((testimonial) => (
+        {testimonials.map((testimonial, index) => (
           <div
-            key={testimonial.id}
+            key={index}
             className="bg-white p-6 rounded-xl shadow max-w-xs"
           >
             <div className="flex items-center gap-3">
@@ -29,7 +29,7 @@ const Testimonial = () => {
               </div>
             </div>
             <div className="flex items-center gap-1 mt-4">
-              <StarRating />
+              <StarRating/>
             </div>
             <p className="text-gray-500 max-w-90 mt-4">
               "{testimonial.review}"
