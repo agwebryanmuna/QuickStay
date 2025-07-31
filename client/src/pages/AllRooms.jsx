@@ -106,7 +106,8 @@ const AllRooms = () => {
                 scrollTo(0, 0);
               }}
               src={room.images[0]}
-              alt=""
+              alt={room.hotel.name}
+              loading="lazy"
               title="View Room Details"
               className="max-h-65 md:w-1/2 rounded-xl shadow-lg object-cover cursor-pointer"
             />
