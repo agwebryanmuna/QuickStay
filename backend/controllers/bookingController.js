@@ -50,7 +50,7 @@ export const createBooking = async (req, res) => {
     totalPrice,
   })
   
-  res.status(201).json({ success: true, message: "Booking created successfully", })
+  res.status(201).json({ success: true, message: "Booking created successfully" })
 }
 
 
