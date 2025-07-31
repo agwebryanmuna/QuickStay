@@ -12,6 +12,8 @@ import Layout from "./pages/hotelOwner/Layout.jsx";
 import Dashboard from "./pages/hotelOwner/Dashboard.jsx";
 import AddRoom from "./pages/hotelOwner/AddRoom.jsx";
 import ListRoom from "./pages/hotelOwner/ListRoom.jsx";
+import ExperiencePage from "./pages/ExperiencePage.jsx";
+import AboutPage from "./pages/AboutPage.jsx";
 
 const App = () => {
   const isOwnerPath = useLocation().pathname.includes("/owner");
@@ -25,9 +27,11 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/rooms" element={<AllRooms/>}/>
+          <Route path="/experience" element={<ExperiencePage/>}/>
+          <Route path="/about" element={<AboutPage/>}/>
           <Route path="/rooms/:roomId" element={<RoomDetails/>}/>
           <Route path="/my-bookings" element={<MyBookings/>}/>
-          <Route path='/owner' element={isOwner ? <Layout/> : <Navigate to={'/'}/>}>
+          <Route path="/owner" element={isOwner ? <Layout/> : <Navigate to={'/'}/>}>
             <Route index element={<Dashboard/>}/>
             <Route path="add-room" element={<AddRoom/>}/>
             <Route path="list-room" element={<ListRoom/>}/>
