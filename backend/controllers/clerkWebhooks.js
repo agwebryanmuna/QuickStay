@@ -19,12 +19,12 @@ const clerkWebhooks = async (req, res) => {
   
   // getting data from the request body
   const { data, type } = req.body;
+  const email = data.email_addresses[0].email_address
   console.log(data)
-  return;
   const userData = {
     _id: data.id,
-    email: data.email_addresses[0].email_address,
-    username: data.fullName,
+    email,
+    username: data.fullName || email.split('@')[0],
     image: data.imageUrl,
   }
   
