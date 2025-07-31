@@ -1,12 +1,92 @@
-# React + Vite
+# QuickStay
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-View%20Site-brightgreen?style=for-the-badge)](https://github.com/agwebryanmuna/QuickStay.git)
 
-Currently, two official plugins are available:
+Quick is a modern, full-stack hotel-booking web application built with the MERN stack (MongoDB, Express.js, React,
+Node.js) and designed for a seamless booking experience. This project demonstrates best practices in web development,
+scalable architecture, and a beautiful, responsive UI—perfect for your portfolio or as a foundation for a real-world
+online booking system.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Key Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **User Authentication & Authorization**
+
+    - Secure login and registration
+    - Clerk authentication
+    - Admin and user roles
+
+- **App Features**
+
+    - Add, edit, and remove rooms (dashboard)
+    - Upload multiple product images (Cloudinary integration)
+    - Add booking, Hotel
+
+- **Admin Dashboard**
+
+    - Manage rooms and view revenue
+    - Update payment status (e.g., Packing, Shipped, Delivered)
+    - View all bookings and rooms
+
+- **Responsive & Modern UI**
+
+    - Mobile-first design with Tailwind CSS
+    - Fast, smooth navigation (React Router)
+    - Toast notifications for user feedback
+
+- **Performance & Best Practices**
+    - RESTful API with Express.js
+    - MongoDB Atlas for cloud database
+    - Environment variables for secure config
+    - ESLint and Prettier for code quality
+
+---
+
+## 🖼️ Screenshots
+
+<img src="https://res.cloudinary.com/dx4rloqv5/image/upload/v1753973727/hotel-booking_zz8ogn.png">
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React, Vite, Tailwind CSS, React Router, Axios
+- **Backend:** Node.js, Express.js, MongoDB (Mongoose)
+- **Authentication:** JWT
+- **File Uploads:** Multer, Cloudinary
+- **Deployment:** Vercel (Frontend), Render (Backend)
+
+---
+
+## 📦 Getting Started
+
+1. **Clone the repository:**
+   ```sh
+   git clone https://github.com/agwebryanmuna/QuickStay.git
+   cd Forever_E-commerce
+   ```
+2. **Install dependencies:**
+    - For backend:
+      ```sh
+      cd backend
+      npm install
+      ```
+    - For frontend:
+      ```sh
+      cd ../client
+      npm install
+      ```
+3. **Set up environment variables:**
+    - Create `.env` files in both backend and client folders (see `.env.example` if provided)
+4. **Run the app locally:**
+    - Start backend:
+      ```sh
+      npm run server
+      ```
+    - Start frontend:
+      ```sh
+      npm run dev
+      ```
+
+---
+**QuickStay** — Built with ❤️ by Agwe Bryan 😘

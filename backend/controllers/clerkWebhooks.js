@@ -1,5 +1,8 @@
 import User from '../models/User.model.js';
 import { Webhook } from "svix";
+import Booking from "../models/Booking.model.js";
+import Room from "../models/Room.modle.js";
+import Hotel from "../models/Hotel.model.js";
 
 const clerkWebhooks = async (req, res) => {
   const hook = new Webhook(process.env.CLERK_WEBHOOK_SECRET);
@@ -16,12 +19,13 @@ const clerkWebhooks = async (req, res) => {
   
   // getting data from the request body
   const { data, type } = req.body;
-  
+  console.log(data)
+  return;
   const userData = {
     _id: data.id,
     email: data.email_addresses[0].email_address,
-    username: data.firstName + ' ' + data.lastName,
-    image: data.image_url,
+    username: data.fullName,
+    image: data.imageUrl,
   }
   
   // switch cases for different events
@@ -39,6 +43,13 @@ const clerkWebhooks = async (req, res) => {
     }
     case "user.deleted": {
       await User.findByIdAndDelete(data.id)
+      // Delete all user bookings, rooms and hotels
+      const userHotels = await Hotel.find({ owner: data.id })
+      if (userHotels) {
+        await Booking.deleteMany({ hotel: userHotels._id })
+        await Room.deleteMany({ hotel: userHotels._id })
+        await Hotel.deleteMany({ owner: data.id })
+      }
       break;
     }
     

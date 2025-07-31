@@ -59,6 +59,7 @@ export const AppContextProvider = ({ children }) => {
   }
   
   useEffect(() => {
+    console.log(user)
     if (user) {
       fetchUser()
     }
