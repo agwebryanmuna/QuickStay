@@ -30,7 +30,10 @@ const clerkWebhooks = async (req, res) => {
   // switch cases for different events
   switch (type) {
     case "user.created": {
-      await User.create(userData);
+      const userExists = await User.findOne({ email: userData.email })
+      if (!userExists) {
+        await User.create(userData);
+      }
       break;
     }
     case "user.updated": {
